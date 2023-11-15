@@ -1,0 +1,33 @@
+# @package _global_
+
+defaults:
+  - override /hydra/sweeper: wandb
+  - override /training: federated
+  - override /dataset: cass_retro
+  - override /dp: ldp
+  - override /early_stopping: enabled
+
+experiment_name: f_deathIID_ldp
+
+wandb:
+  project: CassRetro_FinalEvals
+
+dataset:
+  prediction_target: target_death_within_primary_stay
+  feature_set: [pre]
+
+dp:
+  epsilon: 10.0
+  l2_norm_clip: 0.5
+  noise_multiplier: 0.8
+
+training:
+  split_clients_by: random
+  batch_size: 16
+  client_sampling_prob: 1.0
+  server_optimizer:
+    momentum: 0.0
+  client_optimizer:
+    learning_rate: 0.1
+    _target_: tensorflow.keras.optimizers.SGD
+  local_epochs: 5

@@ -1,0 +1,28 @@
+# @package _global_
+
+defaults:
+  - override /hydra/sweeper: wandb
+  - override /training: federated
+  - override /dataset: cass_retro
+  - override /dp: disabled
+  - override /early_stopping: enabled
+
+experiment_name: f_resurgery_singleClientVal
+
+wandb:
+  project: CassRetro_FinalEvals
+
+dataset:
+  prediction_target: target_resurgery
+  feature_set: [pre]
+
+training:
+  batch_size: 16
+  client_sampling_prob: 0.2
+  client_optimizer:
+    learning_rate: 0.0001
+    _target_: tensorflow.keras.optimizers.Adam
+  server_optimizer:
+    momentum: 0.0
+  local_epochs: 5
+  single_client_validation: True

@@ -1,0 +1,32 @@
+# @package _global_
+
+defaults:
+  - override /hydra/sweeper: wandb
+  - override /training: federated
+  - override /dataset: cass_retro
+  - override /dp: cdp
+  - override /early_stopping: enabled
+
+experiment_name: f_resurgery_cdp
+
+wandb:
+  project: CassRetro_FinalEvals
+
+dataset:
+  prediction_target: target_resurgery
+  feature_set: [pre]
+
+dp:
+  epsilon: 10.0
+  l2_norm_clip: 0.05
+  noise_multiplier: 1.25
+
+training:
+  batch_size: 8
+  client_sampling_prob: 0.5
+  client_optimizer:
+    learning_rate: 0.01
+    _target_: tensorflow.keras.optimizers.SGD
+  server_optimizer:
+    momentum: 0.0
+  local_epochs: 1

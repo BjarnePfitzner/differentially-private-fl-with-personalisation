@@ -1,0 +1,28 @@
+# @package _global_
+
+defaults:
+  - override /hydra/sweeper: wandb
+  - override /training: centralised_per_client_eval
+  - override /dataset: cass_retro
+  - override /dp: ldp
+  - override /early_stopping: enabled
+
+experiment_name: c_death_dp_per_client_eval
+
+wandb:
+  project: CassRetro_FinalEvals
+
+dataset:
+  prediction_target: target_death_within_primary_stay
+  feature_set: [pre]
+
+training:
+  batch_size: 64
+  client_optimizer:
+    learning_rate: 0.01
+    _target_: tensorflow.keras.optimizers.Adam
+
+dp:
+  epsilon: 10.0
+  l2_norm_clip: 0.1
+  noise_multiplier: 1.0

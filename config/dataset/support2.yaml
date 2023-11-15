@@ -1,0 +1,13 @@
+defaults:
+  - imputer: knn_imputer
+
+name: support2
+train_fraction: 0.8
+prediction_target: hospdead
+normalise: minmax
+fs_operations: ['single_unique']
+drop_features: True
+drop_rows_missing_col_fraction: 0
+feature_set:
+drop_cols_missing_row_fraction: 0.5
+correlation_threshold: 0.95

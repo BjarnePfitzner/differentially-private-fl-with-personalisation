@@ -1,0 +1,71 @@
+experiment_name: ???
+final_eval: False
+output_folder: output_folder
+
+debug: False
+zeed: 0
+wandb:
+  disabled: False
+  entity:
+  project:
+  group:
+  name:
+
+defaults:
+  - model: mlp
+  - training: federated
+  - evaluation: dev
+  - dataset: complications
+  - dp: disabled
+  - early_stopping: disabled
+  - override hydra/job_logging: disabled
+  - override hydra/launcher: submitit_slurm
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+  sweep:
+    dir: sweep/${experiment_name}/${now:%Y-%m-%d}/${now:%H-%M-%S}/
+    subdir: ${hydra.job.num}
+  sweeper:
+    _target_: hydra_plugins.hydra_wandb_sweeper.wandb_sweeper.WandbSweeper
+    wandb_sweep_config:
+      name: ${training.type}_${experiment_name}_${now:%d-%m_%H-%M}
+      method: grid
+      metric:
+        goal: maximize
+        name: test/auprc
+        target: 0.98
+      num_agents: 4
+      budget: 1000
+      project: ???
+      early_terminate:
+        type: hyperband
+        min_iter: 4
+        eta: 2
+      sweep_id:
+      notes: ${hydra.overrides.task}
+      tags:
+        - ${training.type}
+        - ${dataset.name}
+        - ${dp.type}_DP
+        - ${dataset.prediction_target}
+      entity: ???
+      count: 1
+      max_run_failure_rate: 1.0
+      max_agent_failure_rate: 1.0
+  launcher:
+    _target_: hydra_plugins.hydra_submitit_launcher.submitit_launcher.SlurmLauncher
+    submitit_folder: ${hydra.sweep.dir}/.submitit/%j
+    timeout_min: 2879
+    cpus_per_task: 6
+    mem_gb: 64
+    name: ${experiment_name}
+    stderr_to_stdout: True
+    partition: "gpu"
+    gpus_per_task: 1
+    signal_delay_s: 120
+    max_num_timeout: 0
+    additional_parameters: { }
+    array_parallelism: 4

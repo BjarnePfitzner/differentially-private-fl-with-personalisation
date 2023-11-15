@@ -1,0 +1,28 @@
+# @package _global_
+
+defaults:
+  - override /hydra/sweeper: wandb
+  - override /training: federated
+  - override /dataset: cass_retro
+  - override /dp: disabled
+  - override /early_stopping: enabled
+
+experiment_name: f_death_singleClientVal
+
+wandb:
+  project: CassRetro_FinalEvals
+
+dataset:
+  prediction_target: target_death_within_primary_stay
+  feature_set: [pre]
+
+training:
+  batch_size: 32
+  client_sampling_prob: 0.5
+  server_optimizer:
+    momentum: 0.0
+  client_optimizer:
+    learning_rate: 0.1
+    _target_: tensorflow.keras.optimizers.SGD
+  local_epochs: 1
+  single_client_validation: True

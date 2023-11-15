@@ -1,0 +1,13 @@
+type: centralised_per_client_eval
+total_rounds: 500
+batch_size: 16
+use_sample_weights: True
+client_optimizer:
+  _target_: tensorflow.keras.optimizers.SGD
+  learning_rate: 0.1
+n_total_clients: 5
+split_clients_by: dzclass
+drop_split_columns: False
+local_epochs: 1
+personalisation: False
+single_client_validation: False

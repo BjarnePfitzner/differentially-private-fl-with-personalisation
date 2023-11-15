@@ -1,0 +1,8 @@
+name: mlp
+neurons: [64]
+dropout: 0.0
+dropout_after: all_hidden
+dropout_input: 0.2
+initialiser: glorot_uniform
+regularisation:
+regularisation_factor:

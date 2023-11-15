@@ -1,0 +1,4 @@
+enabled: True
+patience: 15
+mode: min
+metric_name: loss
