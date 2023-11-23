@@ -126,7 +126,7 @@ def main(cfg: DictConfig):
             logging.info(e)
 
     # Save model
-    model.save(f'{cfg.output_folder}/trained_model')
+    trained_model.save(f'{cfg.output_folder}/trained_model')
     logging.info('Finished training successfully.')
 
 
