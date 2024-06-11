@@ -2,7 +2,7 @@
 
 ## Description
 Project for evaluating federated learning with central or local differential privacy and an optional fine-tuning step for model personalisation.
-This code was used for our paper *[Under Revision...]*
+This code was used for our paper _Pfitzner, B., Maurer, M. M., Winter, A., Riepe, C., Sauer, I. M., Van de Water, R., & Arnrich, B. (2024, February). Differentially-Private Federated Learning with Non-IID Data for Surgical Risk Prediction. In 2024 IEEE First International Conference on Artificial Intelligence for Medicine, Health and Care (AIMHC) (pp. 120-129). IEEE._
 
 ## Installation
 First, create an environment with conda (or any other environment management software you prefer) using Python 3.8 and activate it:
