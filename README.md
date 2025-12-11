@@ -9,7 +9,7 @@ First, create an environment with conda (or any other environment management sof
 
 ```bash
 $ conda create --name dp_fl_per python=3.8.0
-$ conda avtivate dp_fl_per
+$ conda activate dp_fl_per
 ```
 
 Then, install the required packages from the `requirements.txt` file using `pip`:
